@@ -7,5 +7,5 @@
 HTML, CSS, JS, БЭМ.
 
 ### GitHub Pages
-[Ссылка]()
+[Ссылка](https://vonorapunzel.github.io/mesto/index.html)
 
