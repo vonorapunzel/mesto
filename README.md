@@ -9,3 +9,6 @@ HTML, CSS, JS, БЭМ.
 ### GitHub Pages
 [Ссылка](https://vonorapunzel.github.io/mesto/index.html)
 
+### План по доработке проекта
+Реализовать отправку данных на сервер.
+

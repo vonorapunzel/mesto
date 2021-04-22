@@ -1,7 +1,6 @@
 .popup__container {
   margin: 0 auto;
   max-width: 430px;
-  min-height: 330px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
@@ -14,6 +13,5 @@
     margin-right: 19px;
     margin-left: 19px;
     max-width: 282px;
-    min-height: 322px;
   }
 }
