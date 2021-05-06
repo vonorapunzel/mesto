@@ -22,76 +22,50 @@
       <button class="profile__addbutton" type="button"></button>
     </section>
     <section class="elements">
-      <article class="element">
-        <img src="./images/karachaevs.jpg" 
-        alt="Карачевск" class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Карачевск</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/albrus.jpg" alt="Эльбрус" 
-        class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/dombai.jpg" alt="Домбай" 
-        class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Домбай</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/albrus.jpg" alt="Карачевск" 
-        class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Карачевск</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/dombai.jpg" alt="Эльбрус" 
-        class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/karachaevs.jpg" alt="Домбай" 
-        class="element__image">
-        <div class="element__signature">
-          <h2 class="element__title">Карачаево-черкесская</h2>
-          <button class="element__like" aria-label="like" 
-          type="button"></button>
-        </div>
-      </article>
     </section>
-    <div class="popup">
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__exit" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="form">
+        <form class="popup__form popup__form_profile" name="form">
           <input type="text" class="popup__text popup__text_name_input" name="name">
           <input type="text" class="popup__text popup__text_whois_input" name="whois">
-          <button class="popup__save" type="submit">Сохранить</button>
+          <button class="popup__button popup__button_save" type="submit">Сохранить</button>
         </form>
+      </div>
+    </div>
+    <div class="popup popup_add-card">
+      <div class="popup__container">
+        <button class="popup__exit" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_card" name="form">
+          <input type="text" class="popup__text popup__text_title_input" name="title" placeholder="Название">
+          <input type="text" class="popup__text popup__text_link_input" name="link" placeholder="Ссылка на картинку">
+          <button class="popup__button popup__button_create" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_image-open">
+      <div class="popup__container-image">
+        <button class="popup__exit" type="button"></button>
+        <img class="popup__image popup_image-card" src="" alt="">
+        <h2 class="popup__title-image popup_title-card"></h2>
       </div>
     </div>
   </main>
   <footer class="footer">
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
+  <template id="template-element">
+    <article class="element">
+      <button class="element__trash" type="button"></button>
+      <img class="element__image">
+      <div class="element__signature">
+        <h2 class="element__title"></h2>
+        <button class="element__like" type="button"></button>
+      </div>
+    </article>
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 </html>
