@@ -79,7 +79,7 @@ function openImage(evt) {
   popupImage.classList.add('popup_opened');
   const titleImage = evt.target.parentElement.querySelector('.element__title');
   const linkImage = evt.target.parentElement.querySelector('.element__image');
-  let popupTitle = document.querySelector('.popup__title_title-card');
+  let popupTitle = document.querySelector('.popup__title-image_title-card');
   let popupImageCard = document.querySelector('.popup__image_image-card');
   popupTitle.textContent = titleImage.textContent;
   popupImageCard.src = linkImage.src;
