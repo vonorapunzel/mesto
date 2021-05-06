@@ -83,6 +83,7 @@ function openImage(evt) {
   let popupImageCard = document.querySelector('.popup_image-card');
   popupTitle.textContent = titleImage.textContent;
   popupImageCard.src = linkImage.src;
+  popupImageCard.alt = titleImage.textContent;
   
 }
 
