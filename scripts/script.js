@@ -24,6 +24,14 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__text_type_error',
+  errorClass: 'popup__error_visible'
+};
 const elementTemplate = document.querySelector('#template-element');
 const elementsContainer = document.querySelector('.elements');
 const popupList = document.querySelectorAll('.popup');
@@ -64,18 +72,19 @@ function createCard(link, name) {
 initialCards.forEach((itemData) => {
   const staticCard = createCard(itemData.link, itemData.name);
   elementsContainer.append(staticCard);
-  
 });
 
 //открытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', escape);
 }
 
 //Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
+
 
 //открытие popup профиля
 function editPopupProfile() {
@@ -91,6 +100,8 @@ function closePopupProfile() {
 
 //открытие popup для добавления карточки
 function addCard() {
+  const buttonElement = cardForm.querySelector('.popup__button');
+  buttonElement.disabled = true;
   nameInput.value = titleProfile.textContent;
   whois.value = descriprion.textContent;
   openPopup(popupAddCard);
@@ -113,10 +124,6 @@ function openImage(link, name) {
 //закрытие картинки
 function closePopupImage() {
   closePopup(popupImage);
-}
-
-function closePopupProfile() {
-  closePopup(popupEdit);
 }
 
 //сохранение данных в профиль
@@ -152,6 +159,39 @@ function liked(evt) {
   evt.target.classList.toggle('element__like_active');
 }
 
+//обработчик закрытия
+function escape(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupAddCard);
+    closePopup(popupEdit);
+    closePopup(popupImage);
+    resetValid();
+  }
+}
+
+//закрытие по оверлею
+popupList.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') ||
+    evt.target.classList.contains('popup__exit')) {
+      closePopup(item);
+    };
+  });
+});
+
+//сброс валидности полей
+function resetValid() {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  const inputList = Array.from(document.querySelectorAll(config.inputSelector));
+  formList.forEach((formElement) => {
+    inputList.forEach((inputElement) => {
+      hideError(formElement, inputElement, config);
+    });
+  });
+}
+
+enableValidation(config);
+
 addButton.addEventListener('click', addCard);
 editButton.addEventListener('click', editPopupProfile);
 exitPopupProfile.addEventListener('click', closePopupProfile);
@@ -159,4 +199,3 @@ exitPopupAddCard.addEventListener('click', closePopupAddCard);
 exitPopupImage.addEventListener('click', closePopupImage);
 profileForm.addEventListener('submit', submitFormHandler);
 cardForm.addEventListener('submit', addFormCard);
-
