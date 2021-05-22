@@ -83,6 +83,11 @@ function openPopup(popup) {
 //Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  const form = popup.querySelector(config.formSelector);
+  const inputList = form.querySelectorAll(config.inputSelector);
+  inputList.forEach((input) => {
+    hideError(form, input, config)
+  })
 }
 
 
@@ -162,10 +167,9 @@ function liked(evt) {
 //обработчик закрытия
 function escape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(popupAddCard);
-    closePopup(popupEdit);
-    closePopup(popupImage);
-    resetValid();
+    closePopupAddCard();
+    closePopupProfile();
+    closePopupImage();
   }
 }
 
@@ -174,21 +178,12 @@ popupList.forEach((item) => {
   item.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') ||
     evt.target.classList.contains('popup__exit')) {
-      closePopup(item);
+      closePopupAddCard();
+      closePopupProfile();
+      closePopupImage();
     };
   });
 });
-
-//сброс валидности полей
-function resetValid() {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  const inputList = Array.from(document.querySelectorAll(config.inputSelector));
-  formList.forEach((formElement) => {
-    inputList.forEach((inputElement) => {
-      hideError(formElement, inputElement, config);
-    });
-  });
-}
 
 enableValidation(config);
 

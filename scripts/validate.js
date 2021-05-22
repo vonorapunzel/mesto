@@ -9,11 +9,18 @@ const showError = (formElement, inputElement, errorMessage, config) => {
 
 //функция которая убирает ошибку
 const hideError = (formElement, inputElement, config) => {
-  const {inputErrorClass} = config;
+  const {inputErrorClass, errorClass} = config;
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
+
+const hideAllError = (form, inputElement, config) => {
+  const errorElement = form.querySelector(`#${inputElement.id}-error`);
+  errorElement.classList.remove(config.errorClass);
+  inputElement.classList.remove(config.inputErrorClass);
+}
 
 const hasInvalidInput = (inputList) => {
   return inputList.some(inputElement => !inputElement.validity.valid);
