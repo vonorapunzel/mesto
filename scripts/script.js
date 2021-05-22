@@ -30,7 +30,7 @@ const config = {
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__text_error-visible'
+  errorClass: 'popup__span_text-error'
 };
 const elementTemplate = document.querySelector('#template-element');
 const elementsContainer = document.querySelector('.elements');
