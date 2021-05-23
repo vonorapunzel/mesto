@@ -1,59 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__span_text-error'
-};
-const elementTemplate = document.querySelector('#template-element');
-const elementsContainer = document.querySelector('.elements');
-const popupList = document.querySelectorAll('.popup');
-const nameInput = document.querySelector('.popup__text_name_input');
-const whois = document.querySelector('.popup__text_whois_input');
-const titleProfile = document.querySelector('.profile__title');
-const descriprion = document.querySelector('.profile__description');
-const popupEdit = document.querySelector('.popup_edit-profile');
-const popupAddCard = document.querySelector('.popup_add-card');
-const popupImage = document.querySelector('.popup_image-open');
-const editButton = document.querySelector('.profile__editbutton');
-const addButton = document.querySelector('.profile__addbutton');
-const exitPopupProfile = document.querySelector('.popup__exit_exit-profile');
-const exitPopupAddCard = document.querySelector('.popup__exit_exit-add-card');
-const exitPopupImage = document.querySelector('.popup__exit_exit-image');
-const profileForm = document.querySelector('.popup__form_profile');
-const cardForm = document.querySelector('.popup__form_card');
-const popupTitle = document.querySelector('.popup__title-image_title-card');
-const popupImageCard = document.querySelector('.popup__image_image-card');
-const titleEditCard = document.querySelector('.popup__text_title_input');
-const linkEditCard = document.querySelector('.popup__text_link_input');
-
 //возвращает Tamplate карточки
 function createCard(link, name) {
   const newItem = elementTemplate.content.querySelector('.element').cloneNode(true);
@@ -83,19 +27,23 @@ function openPopup(popup) {
 //Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  closeCardPopup(popup); 
+}
+
+//сброс ошибок инпутов
+function closeCardPopup(popup) {
   const form = popup.querySelector(config.formSelector);
   const inputList = form.querySelectorAll(config.inputSelector);
   inputList.forEach((input) => {
-    hideError(form, input, config)
+    hideError(form, input, config);
   })
 }
-
 
 //открытие popup профиля
 function editPopupProfile() {
   openPopup(popupEdit);
   nameInput.value = titleProfile.textContent;
-  whois.value = descriprion.textContent;
+  whoisInput.value = description.textContent;
 }
 
 //закрытие попап профиля
@@ -108,14 +56,14 @@ function addCard() {
   const buttonElement = cardForm.querySelector('.popup__button');
   buttonElement.disabled = true;
   nameInput.value = titleProfile.textContent;
-  whois.value = descriprion.textContent;
+  whoisInput.value = description.textContent;
   openPopup(popupAddCard);
 }
 
 //закрытие попап редактирования карточки
 function closePopupAddCard() {
+  clearInputsCard();
   closePopup(popupAddCard);
-  clearInputsCard()
 }
 
 //просмотр картинки карточки
@@ -135,7 +83,7 @@ function closePopupImage() {
 function submitFormHandler(evt) {
   evt.preventDefault();
   titleProfile.textContent = nameInput.value;
-  descriprion.textContent = whois.value;
+  description.textContent = whoisInput.value;
   closePopup(popupEdit);
 }
 
@@ -167,9 +115,8 @@ function liked(evt) {
 //обработчик закрытия
 function escape(evt) {
   if (evt.key === 'Escape') {
-    closePopupAddCard();
-    closePopupProfile();
-    closePopupImage();
+    closePopup(document.querySelector('.popup_opened'));
+    clearInputsCard();
   }
 }
 
@@ -178,9 +125,11 @@ popupList.forEach((item) => {
   item.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') ||
     evt.target.classList.contains('popup__exit')) {
-      closePopupAddCard();
-      closePopupProfile();
-      closePopupImage();
+      if (evt.target === document.querySelector('.popup_add-card')) {
+        closePopupAddCard();
+      } else {
+        closePopup(evt.target);
+      }
     };
   });
 });
