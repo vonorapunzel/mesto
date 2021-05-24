@@ -27,11 +27,12 @@ function openPopup(popup) {
 //Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  closeCardPopup(popup); 
+  document.removeEventListener('keydown', escape);
 }
 
 //сброс ошибок инпутов
-function closeCardPopup(popup) {
+function openCardPopup(popup) {
+  openPopup(popup);
   const form = popup.querySelector(config.formSelector);
   const inputList = form.querySelectorAll(config.inputSelector);
   inputList.forEach((input) => {
@@ -41,7 +42,7 @@ function closeCardPopup(popup) {
 
 //открытие popup профиля
 function editPopupProfile() {
-  openPopup(popupEdit);
+  openCardPopup(popupEdit);
   nameInput.value = titleProfile.textContent;
   whoisInput.value = description.textContent;
 }
@@ -55,14 +56,12 @@ function closePopupProfile() {
 function addCard() {
   const buttonElement = cardForm.querySelector('.popup__button');
   buttonElement.disabled = true;
-  nameInput.value = titleProfile.textContent;
-  whoisInput.value = description.textContent;
-  openPopup(popupAddCard);
+  clearInputsCard();
+  openCardPopup(popupAddCard);
 }
 
 //закрытие попап редактирования карточки
 function closePopupAddCard() {
-  clearInputsCard();
   closePopup(popupAddCard);
 }
 
@@ -125,11 +124,7 @@ popupList.forEach((item) => {
   item.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') ||
     evt.target.classList.contains('popup__exit')) {
-      if (evt.target === document.querySelector('.popup_add-card')) {
-        closePopupAddCard();
-      } else {
-        closePopup(evt.target);
-      }
+      closePopup(evt.target)
     };
   });
 });
