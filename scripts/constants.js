@@ -53,3 +53,4 @@ const initialCards = [
   const popupImageCard = document.querySelector('.popup__image_image-card');
   const titleEditCard = document.querySelector('.popup__text_title_input');
   const linkEditCard = document.querySelector('.popup__text_link_input');
+  const formList = Array.from(document.querySelectorAll(config.formSelector));

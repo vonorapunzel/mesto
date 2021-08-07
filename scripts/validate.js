@@ -1,4 +1,4 @@
-//функция добавления ошибки
+/*//функция добавления ошибки
 const showError = (formElement, inputElement, errorMessage, config) => {
   const {inputErrorClass, errorClass} = config;
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -63,4 +63,4 @@ const isValid = (formElement, inputElement, config) => {
   } else {
     hideError(formElement, inputElement, config);
   }
-}
+}*/
