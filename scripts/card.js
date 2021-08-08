@@ -17,14 +17,19 @@ export default class Card {
   }
 
   generateCard() {
-    this.element = this._getTemplate();
-    this._openImageCardClick();
-    this._likeCardClick();
-    this._deletedCardClick();
-    this.element.querySelector('.element__title').textContent = this._name;
-    this.element.querySelector('.element__image').src = this._link;
-    return this.element;
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector('.element__title').textContent = this._name;
+    this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__title').alt = this._name;
+    return this._element;
   }
+  
+  _setEventListeners() {
+    this._element.querySelector('.element__image').addEventListener('click', () => {this._openImage()});
+    this._element.querySelector('.element__like').addEventListener('click', () => {this._like()});
+    this._element.querySelector('.element__trash').addEventListener('click', () => {this._deleteCard()})
+  } 
 
   _openImage() {
     openPopup(popupImage);
@@ -33,23 +38,11 @@ export default class Card {
     popupImageCard.alt = this._name;
   }
 
-  _openImageCardClick() {
-    this.element.querySelector('.element__image').addEventListener('click', () => {this._openImage()});
+  _like() {
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
 
-  liked() {
-    this.element.querySelector('.element__like').classList.toggle('element__like_active');
-  }
-
-  _likeCardClick() {
-    this.element.querySelector('.element__like').addEventListener('click', () => {this.liked()});
-  }
-
-  _deletedCard() {
-    this.element.closest('.element').remove();
-  }
-
-  _deletedCardClick() {
-    this.element.querySelector('.element__trash').addEventListener('click', () => {this._deletedCard()})
+  _deleteCard() {
+    this._element.closest('.element').remove();
   }
 }

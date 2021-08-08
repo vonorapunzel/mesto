@@ -3,34 +3,26 @@ import FormValidator from './formValidator.js';
 
 
 function createCard(name, link, elementTemplate) {
-  const card = new Card(name, link, elementTemplate)
+  const card = new Card(name, link, elementTemplate);
   return card;
 }
 
-function render(name, link, elementTemplate) {
+function renderCard(name, link, elementTemplate) {
   return createCard(name, link, elementTemplate).generateCard();
 }
 
-function validation(config, formElement) {
-  const validation = new FormValidator(config, formElement);
-  return validation.enableValidation();
-}
-
-function checkValid() {
-  formList.forEach((formElement) => {
-    validation(config, formElement);
-  });
-}
+const cardFormValidator = new FormValidator(config, cardForm);
+cardFormValidator.enableValidation();
 
 //6 карточек по умолчанию
 initialCards.forEach((item) => {
-  elementsContainer.append(render(item.name, item.link, elementTemplate));
+  elementsContainer.append(renderCard(item.name, item.link, elementTemplate));
 });
 
 //добавление карточки
 function addFormCard(evt) {
   evt.preventDefault();
-  const newCard = render(titleEditCard.value, linkEditCard.value, elementTemplate);
+  const newCard = renderCard(titleEditCard.value, linkEditCard.value, elementTemplate);
   clearInputsCard();
   elementsContainer.prepend(newCard);
   closePopup(popupAddCard);
@@ -62,8 +54,8 @@ function closePopupProfile() {
 
 //открытие popup для добавления карточки
 function addCard() {
-  const buttonElement = cardForm.querySelector('.popup__button');
-  buttonElement.disabled = true;
+  cardFormValidator.hideErrors();
+  cardFormValidator.toogleButtonState();
   clearInputsCard();
   openPopup(popupAddCard);
 }
@@ -86,6 +78,13 @@ function submitFormHandler(evt) {
   closePopup(popupEdit);
 }
 
+function  openPicture(name, link) { //принимает данные
+  openPopup(popupImage);
+  popupTitle.textContent = name;
+  popupImageCard.src = link;
+  popupImageCard.alt = name;
+} 
+
 //очистка инпутов в попап добавления карты
 function clearInputsCard()  {
   titleEditCard.value = '';
@@ -96,7 +95,6 @@ function clearInputsCard()  {
 function escape(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
-    clearInputsCard();
   }
 }
 
@@ -109,8 +107,6 @@ popupList.forEach((item) => {
     };
   });
 });
-
-checkValid();
 
 addButton.addEventListener('click', addCard);
 editButton.addEventListener('click', editPopupProfile);
