@@ -32,25 +32,30 @@ const initialCards = [
     inputErrorClass: 'popup__text_type_error',
     errorClass: 'popup__span_text-error'
   };
-  const elementTemplate = document.querySelector('#template-element');
-  const elementsContainer = document.querySelector('.elements');
-  const popupList = document.querySelectorAll('.popup');
-  const nameInput = document.querySelector('.popup__text_name_input');
-  const whoisInput = document.querySelector('.popup__text_whois_input');
-  const titleProfile = document.querySelector('.profile__title');
-  const description = document.querySelector('.profile__description');
-  const popupEdit = document.querySelector('.popup_edit-profile');
-  const popupAddCard = document.querySelector('.popup_add-card');
-  const popupImage = document.querySelector('.popup_image-open');
-  const editButton = document.querySelector('.profile__editbutton');
-  const addButton = document.querySelector('.profile__addbutton');
-  const exitPopupProfile = document.querySelector('.popup__exit_exit-profile');
-  const exitPopupAddCard = document.querySelector('.popup__exit_exit-add-card');
-  const exitPopupImage = document.querySelector('.popup__exit_exit-image');
-  const profileForm = document.querySelector('.popup__form_profile');
-  const cardForm = document.querySelector('.popup__form_card');
-  const popupTitle = document.querySelector('.popup__title-image_title-card');
-  const popupImageCard = document.querySelector('.popup__image_image-card');
-  const titleEditCard = document.querySelector('.popup__text_title_input');
-  const linkEditCard = document.querySelector('.popup__text_link_input');
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  const elements = {
+    elementTemplate: document.querySelector('#template-element'),
+    elementsContainer: document.querySelector('.elements'),
+    popupList: document.querySelectorAll('.popup'),
+    nameInput: document.querySelector('.popup__text_name_input'),
+    whoisInput: document.querySelector('.popup__text_whois_input'),
+    titleProfile: document.querySelector('.profile__title'),
+    description: document.querySelector('.profile__description'),
+    popupEdit: document.querySelector('.popup_edit-profile'),
+    popupAddCard: document.querySelector('.popup_add-card'),
+    popupImage: document.querySelector('.popup_image-open'),
+    editButton: document.querySelector('.profile__editbutton'),
+    addButton: document.querySelector('.profile__addbutton'),
+    exitPopupProfile: document.querySelector('.popup__exit_exit-profile'),
+    exitPopupAddCard: document.querySelector('.popup__exit_exit-add-card'),
+    exitPopupImage: document.querySelector('.popup__exit_exit-image'),
+    profileForm: document.querySelector('.popup__form_profile'),
+    cardForm: document.querySelector('.popup__form_card'),
+    popupTitle: document.querySelector('.popup__title-image_title-card'),
+    popupImageCard: document.querySelector('.popup__image_image-card'),
+    titleEditCard: document.querySelector('.popup__text_title_input'),
+    linkEditCard: document.querySelector('.popup__text_link_input'),
+    formList: Array.from(document.querySelectorAll(config.formSelector)),
+  }
+
+  export { initialCards, config, elements };
