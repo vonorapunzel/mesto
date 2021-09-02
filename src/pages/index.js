@@ -19,8 +19,8 @@ profileForm.setEventListeners();
 
 const editImageProfile = new PopupWithForm(elements.imageProfile, {
   handleFormSubmit: (cardItem) => {
-    elements.profileAvatar.src = cardItem.link;
-    api.changeAvatar(cardItem, elements.savingImageProfile);
+    elements.profileAvatar.src = cardItem.avatar
+    api.changeAvatar(cardItem, elements.savingImageProfile)
     
   }
 });
