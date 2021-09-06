@@ -1,85 +1,82 @@
 export default class Api {
-  headers = {
-    authorization: '4eb3e4fd-35e6-4e03-a07a-c921c4bb1bec',
-    'Content-Type': 'application/json'
-  }
+  //headers = {
+    //authorization: '4eb3e4fd-35e6-4e03-a07a-c921c4bb1bec',
+    //'Content-Type': 'application/json'
+  //}
   constructor() {
     this._url = 'https://mesto.nomoreparties.co/v1/cohort-27';
+    this._headers = {
+      authorization: '4eb3e4fd-35e6-4e03-a07a-c921c4bb1bec',
+      'Content-Type': 'application/json'};
   }
 
-  editUserProfile(data, button) {
-    this._renderLoading(button, true);
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`); 
+    }
+    return res.json();
+}
+
+_getResponse(res) {
+  console.log(res.ok);
+}
+
+  editUserProfile(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify(data)
     })
-      .finally(() => {
-        this._renderLoading(button, false);
-      }) 
+    .then((response) => {
+      this._getResponse(response);
+    })
   }
 
   getUserProfile() {
     return fetch(`${this._url}/users/me`, {
-      headers: this.headers
+      headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+      .then((res) => {
+        this._getResponse(res);
+        const result = this._getResponseData(res);
+        return result;
       });
   } 
   
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      headers: this.headers
+      headers: this._headers
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        this._getResponse(res);
+        const result = this._getResponseData(res);
+        return result;
       });
   }
   
-  addNewCard(data, button) {
-    this._renderLoading(button, true);
+  addNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify(data)
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .finally(() => {
-        this._renderLoading(button, false);
+        console.log(res.ok);
+        const result = this._getResponseData(res);
+        return result;
       })
   }
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: this._headers,
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        this._getResponse(res);
+        const result = this._getResponseData(res);
+        return result;
       });
   }
 
@@ -91,38 +88,26 @@ export default class Api {
     }
     return fetch(`${this._url}/cards/likes/${id}`, {
       method: this._method,
-      headers: this.headers,
+      headers: this._headers,
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        this._getResponse(res);
+        const result = this._getResponseData(res);
+        return result;
       });
   }
 
-  changeAvatar(data, button) {
-    this._renderLoading(button, true);
+  changeAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
       })
     })
-      .finally(() => {
-        this._renderLoading(button, false);
-      })
-  }
-
-  _renderLoading(button, isLoading) {
-    if(isLoading) {
-      button.textContent = 'Сохранение...';
-    } else {
-      button.textContent = 'Сохранить';
-    }
+    .then((response) => {
+      this._getResponse(response);
+    })
   } 
 }
 

@@ -66,7 +66,6 @@ const initialCards = [
     imageProfile: document.querySelector('.popup_profile-image'),
     profileAvatar: document.querySelector('.profile__avatar'),
     delCard: document.querySelector('.popup_delete-card'),
-    id: 'b728b0821c88f6c27db30f15'
   }
 
   export { initialCards, config, elements };

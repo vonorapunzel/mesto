@@ -1,10 +1,50 @@
 # Проект 9: Место
 
-### Описание проекта и его функциональность
-В проекте Mesto Russia пользователи могут полнустью изменять свой профиль (аватар, имя, о себе). Добавлять карточки, удалять карточки, лайкать карточки. Формы проходят валидацию. Данные уходят и приходят с сервера.
+## Описание проекта
+В проекте Mesto Russia пользователи могут делиться красивыми пейзажами России.
 
-### Какие технологии используются
-HTML (БЭМ), CSS (flex, grid), JavaScript (ООП, асинхронность, DOM, REST API, валидация форм), git, webpack.
+## Стек:
+- HTML
+- CSS
+- JavaScript
+
+## Функционал:
+- Редактирование профиля
+- Добавление новых карточек
+- Валидация на стороне клиента
+- Данные хранятся на сервере и загружаются с сервера
+- Удаление карточек
+- Лайк карточек
+
+## Какие технологии используются:
+- FlexBox
+- GridLayot
+- Positioning Elements
+- Animation and Transform CSS
+- BEM
+- Nested BEM
+- Git
+- JavaScript(Asynch JS, OOP, DOM API, Fetch API)
+- Webpack
+- Figma
+
+## Пакеты которые используются в сборках:
+
+- Babel
+- 
+
+## Инструкция по установке:
+```
+git clone https://github.com/vonorapunzel/mesto.git
+
+cd mesto
+
+npm i webpack --save-dev
+
+npm run build
+
+npm run dev
+```
 
 ### GitHub Pages
 [Ссылка](https://vonorapunzel.github.io/mesto/index.html)

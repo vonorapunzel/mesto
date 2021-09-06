@@ -1,10 +1,11 @@
 export default class Card {
 
-  constructor(data, elementTemplate, handleOpenPopup, {handleRemoveClick}, handleLikeClick) {
+  constructor(data, elementTemplate, handleOpenPopup, {handleRemoveClick}, {handleLikeClick}, personalId) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
+    this._personalId = personalId;
     this._elementTemplate = elementTemplate;
     this._handleOpenPopup = handleOpenPopup;
     this._like = data.likes.length;
@@ -28,7 +29,8 @@ export default class Card {
     this._likeCounter = this._element.querySelector('.element__counter');
     this._likeCounter.textContent = this._like
     this._trashElement = this._element.querySelector('.element__trash');
-    this._checkHeart();
+    this._checkDelete();
+    this._checkLike();
     this._setEventListeners();
     return this._element;
   }
@@ -39,29 +41,37 @@ export default class Card {
     this._imageElement.addEventListener('click', () => {this._handleOpenPopup(this._name, this._link)});
   } 
 
-  _likeCard() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
-    if(this._element.querySelector('.element__like').classList.contains('element__like_active')){
-      this._likeCounter.textContent = parseInt(this._likeCounter.textContent, 10) + 1;
-      this._handleLikeClick(this._id, true) 
+  _likeCard() { 
+    if (!this._element.querySelector('.element__like').classList.contains('element__like_active')) {
+      this._handleLikeClick(this._id, true);
     } else {
-      this._likeCounter.textContent = parseInt(this._likeCounter.textContent, 10) - 1;
-      this._handleLikeClick(this._id, false)
+      this._handleLikeClick(this._id, false);
     }
   }
-  
-  getAnotherId(id){
-    this._anotherId = id;
+
+  likeCard() {
+    this._element.querySelector('.element__like').classList.add('element__like_active');
+    this._likeCounter.textContent = parseInt(this._likeCounter.textContent, 10) + 1;
   }
 
-  _checkHeart() {
+  deleteLike() {
+    this._element.querySelector('.element__like').classList.remove('element__like_active');
+    this._likeCounter.textContent = parseInt(this._likeCounter.textContent, 10) - 1;
+  }
+
+  _checkLike() {
     this._data.likes.forEach(item => {
-      if (item._id === this.getAnotherId) {
-        document.querySelector('.element__like').classList.toggle('element__like_active')
+      if (item._id === this._personalId) {
+        this._likeElement.classList.add('element__like_active')
       }
     })
   }
 
+  _checkDelete() {
+    if(this._personalId != this._data.owner._id) {
+      this._trashElement.remove();
+    }
+  }
   deleteCard() {
     this._element.remove();
   }

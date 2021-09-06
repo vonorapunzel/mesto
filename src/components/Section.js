@@ -5,14 +5,14 @@ export default class Section {
     this._container = selectorContainer;
   }
 
-  renderingElements () {
+  renderingElements(items) {
     //отрисовка каждого отдельного элемента функцией renderer
-    this._initialCards.forEach(element => {
+    items.forEach(element => {
       this._renderer(element);
     });
   }
 
-  addItem (element) {
+  addItem(element) {
     //принимает DOM-элемент и добавляет в контейнер.
     this._container.prepend(element);
   }
