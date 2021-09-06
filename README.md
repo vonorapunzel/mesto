@@ -28,11 +28,6 @@
 - Webpack
 - Figma
 
-## Пакеты которые используются в сборках:
-
-- Babel
-- 
-
 ## Инструкция по установке:
 ```
 git clone https://github.com/vonorapunzel/mesto.git
