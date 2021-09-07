@@ -17,10 +17,6 @@ export default class Api {
     return res.json();
 }
 
-_getResponse(res) {
-  console.log(res.ok);
-}
-
   editUserProfile(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
@@ -28,7 +24,7 @@ _getResponse(res) {
       body: JSON.stringify(data)
     })
     .then((response) => {
-      this._getResponse(response);
+      this._getResponseData(response);
     })
   }
 
@@ -37,7 +33,6 @@ _getResponse(res) {
       headers: this._headers
     })
       .then((res) => {
-        this._getResponse(res);
         const result = this._getResponseData(res);
         return result;
       });
@@ -49,7 +44,6 @@ _getResponse(res) {
       headers: this._headers
     })
       .then(res => {
-        this._getResponse(res);
         const result = this._getResponseData(res);
         return result;
       });
@@ -62,7 +56,6 @@ _getResponse(res) {
       body: JSON.stringify(data)
     })
       .then(res => {
-        console.log(res.ok);
         const result = this._getResponseData(res);
         return result;
       })
@@ -74,7 +67,6 @@ _getResponse(res) {
       headers: this._headers,
     })
       .then(res => {
-        this._getResponse(res);
         const result = this._getResponseData(res);
         return result;
       });
@@ -91,7 +83,6 @@ _getResponse(res) {
       headers: this._headers,
     })
       .then(res => {
-        this._getResponse(res);
         const result = this._getResponseData(res);
         return result;
       });
@@ -106,7 +97,7 @@ _getResponse(res) {
       })
     })
     .then((response) => {
-      this._getResponse(response);
+      this._getResponseData(response)
     })
   } 
 }
